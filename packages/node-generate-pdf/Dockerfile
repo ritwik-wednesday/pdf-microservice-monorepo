@@ -3,5 +3,5 @@ RUN mkdir -p /app
 ADD . /app
 WORKDIR /app
 RUN yarn
-CMD ["sh", "./migrate-and-run.sh"]
+CMD yarn start
 EXPOSE 9000
