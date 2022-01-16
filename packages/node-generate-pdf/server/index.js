@@ -21,12 +21,6 @@ export const init = () => {
   app.use(express.json());
   app.use(rTracer.expressMiddleware());
 
-  app.get('/', (req, res) => {
-    const message = 'Service up and running!';
-    logger().info(message);
-    res.json(message);
-  });
-
   app.use('/pdf', async (req, res) => {
     const pdf = await generatePDF(`
       <html>
@@ -41,6 +35,12 @@ export const init = () => {
 
     res.set('Content-Type', 'application/pdf');
     res.send(pdf);
+  });
+
+  app.use('/', (req, res) => {
+    const message = 'Service up and running!';
+    logger().info(message);
+    res.json(message);
   });
 
   /* istanbul ignore next */
