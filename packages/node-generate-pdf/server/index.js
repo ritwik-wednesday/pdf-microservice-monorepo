@@ -5,6 +5,7 @@ import { isTestEnv, logger } from '@utils/index';
 import cluster from 'cluster';
 import os from 'os';
 import 'source-map-support/register';
+import { generatePDF } from './services/generatePDF.js';
 
 const totalCPUs = os.cpus().length;
 
@@ -20,11 +21,28 @@ export const init = () => {
   app.use(express.json());
   app.use(rTracer.expressMiddleware());
 
-  app.use('/', (req, res) => {
+  app.get('/', (req, res) => {
     const message = 'Service up and running!';
     logger().info(message);
     res.json(message);
   });
+
+  app.use('/pdf', async (req, res) => {
+    const pdf = await generatePDF(`
+      <html>
+        <head>
+          <title>Test PDF</title>
+        </head>
+        <body>
+           // The contents of our PDF will go here...
+        </body>
+      </html>
+    `);
+
+    res.set('Content-Type', 'application/pdf');
+    res.send(pdf);
+  });
+
   /* istanbul ignore next */
   if (!isTestEnv()) {
     app.listen(9000);
