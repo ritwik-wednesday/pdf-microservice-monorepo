@@ -103,6 +103,9 @@ module.exports = (options = {}) => ({
       }
     ]
   },
+  externals: {
+    puppeteer: 'require("puppeteer")'
+  },
   plugins: options.plugins.concat([
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
