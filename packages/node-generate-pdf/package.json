@@ -57,6 +57,7 @@
     "moment": "^2.29.1",
     "path": "^0.12.7",
     "puppeteer": "^9.1.1",
+    "puppeteer-core": "^9.1.1",
     "source-map-support": "^0.5.19",
     "webpack": "5.45.1",
     "webpack-bundle-analyzer": "^4.4.2",
