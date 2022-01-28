@@ -1,0 +1,159 @@
+{
+  "ipcMode": null,
+  "executionRoleArn": "arn:aws:iam::511522223657:role/pdf-microservice-dev-pdf-microservic-ExecutionRole-DIQW8XC14GPJ",
+  "containerDefinitions": [
+    {
+      "dnsSearchDomains": [],
+      "environmentFiles": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": [],
+        "options": {
+          "awslogs-group": "/copilot/pdf-microservice-dev-pdf-microservice-dev-svc",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "copilot"
+        }
+      },
+      "entryPoint": [],
+      "portMappings": [
+        {
+          "hostPort": 9000,
+          "protocol": "tcp",
+          "containerPort": 9000
+        }
+      ],
+      "command": [],
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "COPILOT_APPLICATION_NAME",
+          "value": "pdf-microservice"
+        },
+        {
+          "name": "COPILOT_ENVIRONMENT_NAME",
+          "value": "dev"
+        },
+        {
+          "name": "COPILOT_LB_DNS",
+          "value": "pdf-m-Publi-NG0HREJSKUST-1809182718.ap-south-1.elb.amazonaws.com"
+        },
+        {
+          "name": "COPILOT_SERVICE_DISCOVERY_ENDPOINT",
+          "value": "dev.pdf-microservice.local"
+        },
+        {
+          "name": "COPILOT_SERVICE_NAME",
+          "value": "pdf-microservice-dev-svc"
+        }
+      ],
+      "resourceRequirements": null,
+      "ulimits": [],
+      "dnsServers": [],
+      "mountPoints": [],
+      "workingDirectory": null,
+      "secrets": [],
+      "dockerSecurityOptions": [],
+      "memory": null,
+      "memoryReservation": null,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/pdf-microservice/pdf-microservice-dev-svc@sha256:923bef2b8d8e557ab770600b37bb07552cc93584763ce082cb39c7c1c45f9798",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": [],
+      "hostname": null,
+      "extraHosts": [],
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": {},
+      "systemControls": [],
+      "privileged": null,
+      "name": "pdf-microservice-dev-svc"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "512",
+  "taskRoleArn": "arn:aws:iam::511522223657:role/pdf-microservice-dev-pdf-microservice-dev-TaskRole-4K2DMXNDIBD",
+  "compatibilities": ["EC2", "FARGATE"],
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/pdf-microservice-dev-pdf-microservice-dev-svc:1",
+  "family": "pdf-microservice-dev-pdf-microservice-dev-svc",
+  "requiresAttributes": [
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.task-eni"
+    }
+  ],
+  "pidMode": null,
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "runtimePlatform": null,
+  "cpu": "256",
+  "revision": 1,
+  "status": "ACTIVE",
+  "inferenceAccelerators": null,
+  "proxyConfiguration": null,
+  "volumes": []
+}
