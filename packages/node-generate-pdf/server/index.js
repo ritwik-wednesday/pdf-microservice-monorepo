@@ -23,6 +23,8 @@ export const init = () => {
 
   app.use('/pdf', async (req, res) => {
     const pdf = await generatePDF(req.body.html);
+
+    res.set('Content-Type', 'application/pdf');
     res.send(pdf);
   });
 
