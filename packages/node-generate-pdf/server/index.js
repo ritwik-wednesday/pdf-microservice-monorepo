@@ -6,6 +6,7 @@ import cluster from 'cluster';
 import os from 'os';
 import 'source-map-support/register';
 import { generatePDF } from './services/generatePDF.js';
+import templates from './utils/templates.js';
 
 const totalCPUs = os.cpus().length;
 
@@ -22,7 +23,8 @@ export const init = () => {
   app.use(rTracer.expressMiddleware());
 
   app.use('/pdf', async (req, res) => {
-    const pdf = await generatePDF(req.body.html);
+    const template = templates[req.body.templateId](req.body.templateArgs);
+    const pdf = await generatePDF(template);
 
     res.set('Content-Type', 'application/pdf');
     res.send(pdf);
