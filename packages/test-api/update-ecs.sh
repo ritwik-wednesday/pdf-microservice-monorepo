@@ -1,0 +1,1 @@
+copilot deploy --name "test-api-v2-dev-svc" -e "dev"

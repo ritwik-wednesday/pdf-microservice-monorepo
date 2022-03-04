@@ -9,43 +9,37 @@ on:
       - .github/workflows/pdf-microservice-cd.yml
 
 jobs:
-  docker-build-and-push:
-    name: Docker build and push
+  deploy:
+    name: Deploy to ECS
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set branch name
+        id: vars
+        run: echo ::set-output name=stage::${GITHUB_REF#refs/*/}
+      - name: Set env.ENVIRONMENT_NAME
+        run: |
+          if [[ ${{ steps.vars.outputs.stage }} == 'main' ]]; then
+              echo "ENVIRONMENT_NAME=dev" >> "$GITHUB_ENV"
+          else
+              echo "ENVIRONMENT_NAME=${{ steps.vars.outputs.stage }}" >> "$GITHUB_ENV"
+          fi
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-      - name: Build, tag, and push image to Amazon ECR
+
+      - name: Setup AWS Copilot
+        uses: softprops/setup-aws-copilot@v1
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.PDF_MICROSERVICE_AWS_ECR_REPOSITORY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          IMAGE_TAG: ${{ github.sha }}
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+      - name: Deploy ECS
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      - name: Render Amazon ECS task definition
-        id: pdf-microservice-container
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: task-definition-dev.json
-          container-name: pdf-microservice-dev-svc
-          image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.PDF_MICROSERVICE_AWS_ECR_REPOSITORY }}:${{ github.sha }}
-      - name: Deploy to Amazon ECS service
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: ${{ steps.pdf-microservice-container.outputs.task-definition }}
-          service: pdf-microservice-dev-pdf-microservice-dev-svc-Service-vQexgR0i0wnh
-          cluster: pdf-microservice-dev-Cluster-HiNp4c82rh4g
-      - name: Logout of Amazon ECR
-        if: always()
-        run: docker logout ${{ steps.login-ecr.outputs.registry }}
+          cd packages/pdf-microservice
+          ./update-ecs.sh

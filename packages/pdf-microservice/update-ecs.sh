@@ -1,0 +1,1 @@
+copilot deploy --name "pdf-microservice-dev-svc" -e "dev"
