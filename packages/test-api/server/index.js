@@ -26,6 +26,7 @@ import 'source-map-support/register';
 import { initQueues } from '@utils/queue';
 import { sendMessage } from '@services/slack';
 import { WHITELISTED_PATHS } from '@utils/constants';
+import { create } from 'apisauce';
 
 const totalCPUs = os.cpus().length;
 
