@@ -14,7 +14,7 @@ import { newCircuitBreaker } from '@services/circuitbreaker';
 import { isAuthenticated, handlePreflightRequest, corsOptionsDelegate } from '@middleware/gqlAuth';
 import rTracer from 'cls-rtracer';
 import bodyParser from 'body-parser';
-import { connect } from '@database';
+// import { connect } from '@database';
 import { QueryRoot } from '@gql/queries';
 import { MutationRoot } from '@gql/mutations';
 import { isLocalEnv, isTestEnv, logger } from '@utils/index';
@@ -39,7 +39,7 @@ export const init = async () => {
   dotenv.config({ path: `.env.${process.env.ENVIRONMENT_NAME}` });
 
   // connect to database
-  connect();
+  // connect();
 
   // create the graphQL schema
   const schema = new GraphQLSchema({ query: QueryRoot, mutation: MutationRoot });
@@ -108,15 +108,9 @@ export const init = async () => {
     }
   ]);
 
-  app.use('/', (req, res) => {
-    const message = 'Service up and running!';
-    sendMessage(message);
-    logger().info(message);
-    res.json(message);
-  });
-
   app.use('/get-pdf', async (req, res) => {
     try {
+      console.log({ req });
       const apiClient = create({ baseURL: process.env.PDF_MICROSERIVCE_SD_ENDPOINT });
 
       const options = {
@@ -137,6 +131,13 @@ export const init = async () => {
       logger().info(error.message);
       throw new Error(error);
     }
+  });
+
+  app.use('/', (req, res) => {
+    const message = 'Service up and running!';
+    sendMessage(message);
+    logger().info(message);
+    res.json(message);
   });
 
   /* istanbul ignore next */
