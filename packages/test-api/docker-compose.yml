@@ -1,7 +1,18 @@
 version: '3'
 services:
+  db_postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    restart: always
+    env_file:
+      - .env.development
   app:
     build: .
     restart: always
     ports:
       - 9000:9000
+    env_file:
+      - .env.development
+    environment:
+      ENVIRONMENT_NAME: 'development'
