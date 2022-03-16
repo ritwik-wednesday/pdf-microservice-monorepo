@@ -36,16 +36,16 @@ describe('init', () => {
     expect(mocks.app.use.mock.calls[0][0]).toEqual(expect.any(Function));
   });
 
-  it('should invoke @database.connect ', async () => {
-    mocks.db = { getClient: jest.fn(), connect: jest.fn() };
-    jest.spyOn(mocks.db, 'connect');
-    jest.doMock('@database', () => mocks.db);
+  // it('should invoke @database.connect ', async () => {
+  //   mocks.db = { getClient: jest.fn(), connect: jest.fn() };
+  //   jest.spyOn(mocks.db, 'connect');
+  //   jest.doMock('@database', () => mocks.db);
 
-    await require('../index');
+  //   await require('../index');
 
-    // the database connection is being made
-    expect(mocks.db.connect.mock.calls.length).toBe(1);
-  });
+  //   // the database connection is being made
+  //   expect(mocks.db.connect.mock.calls.length).toBe(1);
+  // });
 });
 describe('TestApp: Server', () => {
   it('should respond to /graphql', async () => {
