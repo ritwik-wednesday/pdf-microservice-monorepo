@@ -1,4 +1,4 @@
-name: PDF-Microservice CI
+name: test-api CI
 
 on:
   pull_request:
