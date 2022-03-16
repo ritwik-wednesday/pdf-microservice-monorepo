@@ -89,16 +89,3 @@ describe('github API', () => {
     expect(res.body).toStrictEqual({ error });
   });
 });
-
-// describe('fetchFromGithub', () => {
-//   it('should call the github api', async () => {
-//     const repo = 'repo';
-//     const { fetchFromGithub } = require('../index');
-//     const res = { data: { items: [] } };
-//     const axiosSpy = jest.spyOn(require('axios'), 'get').mockImplementation(() => res);
-//     const data = await fetchFromGithub(repo);
-//     expect(data).toBe(res);
-//     expect(axiosSpy).toBeCalled();
-//     expect(axiosSpy).toBeCalledWith(`https://api.github.com/search/repositories?q=${repo}&per_page=2`);
-//   });
-// });
