@@ -8,6 +8,9 @@ on:
     paths:
       - packages/test-api/**
       - .github/workflows/test-api-ci.yml
+defaults:
+  run:
+    working-directory: packages/test-api
 jobs:
   build-and-test:
     name: Build & Test
@@ -26,12 +29,12 @@ jobs:
           cache-dependency-path: packages/test-api/yarn.lock
 
       - name: Install dependencies
-        run: lerna bootstrap
+        run: yarn install
       - name: Lint
-        run: lerna run lint
+        run: yarn run lint
 
       - name: Test
-        run: lerna run test
+        run: ./test-ci.sh
 
       - name: Build
-        run: lerna run build
+        run: yarn run build
