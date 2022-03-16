@@ -1,0 +1,37 @@
+name: PDF-Microservice CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths:
+      - packages/test-api/**
+      - .github/workflows/test-api-ci.yml
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+          cache-dependency-path: packages/test-api/yarn.lock
+
+      - name: Install dependencies
+        run: lerna bootstrap
+      - name: Lint
+        run: lerna run lint
+
+      - name: Test
+        run: lerna run test
+
+      - name: Build
+        run: lerna run build
