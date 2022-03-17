@@ -1,0 +1,38 @@
+name: pdf-microservice CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths:
+      - packages/pdf-microservice/**
+      - .github/workflows/pdf-microservice-ci.yml
+defaults:
+  run:
+    working-directory: packages/pdf-microservice
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+          cache-dependency-path: packages/pdf-microservice/yarn.lock
+
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint
+        run: yarn run lint
+
+      - name: Test
+        run: ./test-ci.sh

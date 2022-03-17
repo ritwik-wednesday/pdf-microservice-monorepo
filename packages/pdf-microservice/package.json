@@ -1,18 +1,18 @@
 {
-  "name": "reporting-dashboard",
+  "name": "pdf-microservice",
   "version": "1.0.0",
   "description": "",
   "main": "server/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wednesday-solutions/reporting-dashboard.git"
+    "url": "git+https://github.com/ritwik-wednesday/pdf-microservice-monorepo.git"
   },
   "author": "Wednesday Solutions",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wednesday-solutions/reporting-dashboard/issues"
+    "url": "https://github.com/ritwik-wednesday/pdf-microservice-monorepo/issues"
   },
-  "homepage": "https://github.com/wednesday-solutions/reporting-dashboard#readme",
+  "homepage": "https://github.com/ritwik-wednesday/pdf-microservice-monorepo#readme",
   "scripts": {
     "start:local": "nodemon",
     "local": "kill-port 9000 && export ENVIRONMENT_NAME=local && yarn build:local && yarn start",

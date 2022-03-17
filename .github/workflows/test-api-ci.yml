@@ -1,18 +1,23 @@
-name: Monorepo CI
+name: test-api CI
 
 on:
   pull_request:
     branches:
       - develop
       - main
-
+    paths:
+      - packages/test-api/**
+      - .github/workflows/test-api-ci.yml
+defaults:
+  run:
+    working-directory: packages/test-api
 jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -21,14 +26,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
+          cache-dependency-path: packages/test-api/yarn.lock
 
       - name: Install dependencies
-        run: lerna bootstrap
+        run: yarn install
       - name: Lint
-        run: lerna run lint
+        run: yarn run lint
 
       - name: Test
-        run: lerna run test
-
-      - name: Build
-        run: lerna run build
+        run: ./test-ci.sh

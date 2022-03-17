@@ -27,6 +27,10 @@ module.exports = (options = {}) => ({
   mode: options.mode,
   entry: options.entry,
   optimization: options.optimization,
+  devtool: 'source-map',
+  externals: {
+    bull: 'commonjs2 bull'
+  },
   module: {
     rules: [
       {
@@ -119,7 +123,12 @@ module.exports = (options = {}) => ({
       '@root': '.',
       '@server': path.resolve(__dirname, './server'),
       '@utils': path.resolve(__dirname, './server/utils'),
-      '@middleware': path.resolve(__dirname, './server/middleware')
+      '@middleware': path.resolve(__dirname, './server/middleware'),
+      '@services': path.resolve(__dirname, './server/services'),
+      '@daos': path.resolve(__dirname, './server/daos'),
+      '@database': path.resolve(__dirname, './server/database'),
+      '@gql': path.resolve(__dirname, './server/gql'),
+      '@config': path.resolve(__dirname, 'config')
     },
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main']
