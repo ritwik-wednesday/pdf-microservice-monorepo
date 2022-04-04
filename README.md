@@ -1,7 +1,8 @@
-## PDF microservice monorepo
+### PDF microservice monorepo
 
-## PDF microservice
+## Project structure
 
-```
-packages/pdf-microservice
-```
+We have 2 packages inside the project:
+
+- PDF microservice: `packages/pdf-microservice`
+- test api: `packages/test-api`
