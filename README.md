@@ -1,4 +1,4 @@
-### PDF microservice monorepo
+# PDF microservice monorepo
 
 ## Project structure
 
