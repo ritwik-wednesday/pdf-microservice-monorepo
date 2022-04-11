@@ -23,3 +23,7 @@ We have 2 packages inside the project:
 |   ├── test-api/ <-- test api
 
 ```
+
+## How it works
+
+![Untitled](https://user-images.githubusercontent.com/77774719/162744122-1eea5bde-1eb7-4b7f-a399-3ed83fcc7b68.png)
