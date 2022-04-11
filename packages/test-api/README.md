@@ -65,6 +65,14 @@ Relay support has been added by following [this](https://github.com/mickhansen/g
 
 ## Setup
 
+### Copilot
+
+```
+copilot init -a "pdf-microservice" -t "Load Balanced Web Service" -n "test-api-v2-dev-svc" -d ./Dockerfile
+copilot env init --name dev --profile default --import-vpc-id <vpc-id>
+copilot deploy --name "test-api-v2-dev-svc" -e "dev"
+```
+
 ### Setup and run locally using
 
 ```
