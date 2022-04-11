@@ -26,4 +26,4 @@ We have 2 packages inside the project:
 
 ## How it works
 
-![Untitled](https://user-images.githubusercontent.com/77774719/162744122-1eea5bde-1eb7-4b7f-a399-3ed83fcc7b68.png)
+![Untitled](https://user-images.githubusercontent.com/77774719/162745632-896375a8-016d-4fab-a4ba-6f5cfd875260.svg)
