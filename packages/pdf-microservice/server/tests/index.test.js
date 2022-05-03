@@ -19,7 +19,7 @@ describe('init', () => {
     await init();
 
     // check if the server has been started
-    expect(mocks.app.use.mock.calls.length).toBe(4);
+    expect(mocks.app.use.mock.calls.length).toBe(5);
     expect(mocks.app.use.mock.calls[0][0]).toEqual(expect.any(Function));
   });
 });
