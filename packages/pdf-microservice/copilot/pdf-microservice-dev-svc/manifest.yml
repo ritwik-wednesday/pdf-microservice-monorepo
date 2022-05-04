@@ -32,9 +32,10 @@ exec: true # Enable running commands in your container.
 # variables:                    # Pass environment variables as key value pairs.
 #  ENVIRONMENT_NAME: develop
 
-#secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
-#  GITHUB_TOKEN: GITHUB_TOKEN  # The key is the name of the environment variable, the value is the name of the SSM parameter.
-
+secrets:
+  AWS_REGION: 'dev/pdf-microservice/aws:AWS_REGION::'
+  AWS_SECRET_ACCESS_KEY: 'dev/pdf-microservice/aws:AWS_SECRET_ACCESS_KEY::'
+  AWS_ACCESS_KEY_ID: 'dev/pdf-microservice/aws:AWS_ACCESS_KEY_ID::'
 # You can override any of the values defined above by environment.
 #environments:
 #  test:

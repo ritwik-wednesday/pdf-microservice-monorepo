@@ -6,6 +6,8 @@ import cluster from 'cluster';
 import os from 'os';
 import 'source-map-support/register';
 import { generatePDF } from './services/generatePDF.js';
+import { sendSESEmailWithAttachments } from './services/ses';
+import uniqid from 'uniqid';
 import templates from './utils/templates.js';
 
 const totalCPUs = os.cpus().length;
@@ -28,6 +30,32 @@ export const init = () => {
 
     res.set('Content-Type', 'application/pdf');
     res.send(pdf);
+  });
+
+  app.use('/email', async (req, res) => {
+    const pdfs = await Promise.all(
+      req.body.pdfs.map(pdfData => {
+        const template = templates[pdfData.templateId](pdfData.templateArgs);
+        return generatePDF(template);
+      })
+    );
+
+    const attachments = pdfs.map(pdf => ({
+      filename: `${uniqid()}.pdf`,
+      content: pdf
+    }));
+    const mailOptions = {
+      from: req.body?.from || 'ritwik@wednesday.is',
+      to: req.body?.toAddresses || 'ritwik@wednesday.is',
+      cc: req.body?.cc || 'ritwik@wednesday.is',
+      subject: req.body?.subject || 'Subject',
+      text: req.body?.message || 'Message',
+      replyTo: req.body?.replyTo || 'ritwik@wednesday.is',
+      attachments
+    };
+
+    const response = await sendSESEmailWithAttachments(mailOptions);
+    res.send(response);
   });
 
   app.use('/', (req, res) => {
