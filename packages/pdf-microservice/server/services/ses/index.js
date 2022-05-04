@@ -5,7 +5,7 @@ const aws = require('@aws-sdk/client-ses');
 export const sendSESEmailWithAttachments = mailOptions => {
   const ses = new aws.SES({
     apiVersion: '2010-12-01',
-    region: process.env.REGION,
+    region: process.env.AWS_REGION,
     defaultProvider
   });
 
