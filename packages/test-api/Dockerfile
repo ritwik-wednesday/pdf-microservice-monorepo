@@ -4,4 +4,4 @@ ADD . /app
 WORKDIR /app
 RUN yarn
 CMD ["sh", "./build-and-run.sh"]
-EXPOSE 9001
+EXPOSE 9000

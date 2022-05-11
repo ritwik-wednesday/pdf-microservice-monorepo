@@ -3,8 +3,8 @@
   "watch": ["server/*", "./public/*"],
   "ignore": ["**/__tests__/**", "*.test.js", "*.spec.js"],
   "events": {
-    "restart": "kill-port 9001",
-    "crash": "kill-port 9001 && npm run local"
+    "restart": "kill-port 9000",
+    "crash": "kill-port 9000 && npm run local"
   },
   "delay": "250"
 }
