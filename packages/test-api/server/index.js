@@ -110,6 +110,7 @@ export const init = async () => {
 
   app.use('/get-pdf', async (req, res) => {
     try {
+      console.log({ req });
       const apiClient = create({ baseURL: process.env.PDF_MICROSERIVCE_SD_ENDPOINT });
 
       const options = {
@@ -125,20 +126,6 @@ export const init = async () => {
         res.set(key, pdf.headers[key]);
       });
       res.send(pdf.data);
-    } catch (error) {
-      console.log(error.message);
-      logger().info(error.message);
-      throw new Error(error);
-    }
-  });
-
-  app.use('/send-email-with-attachemnts', async (req, res) => {
-    try {
-      const apiClient = create({ baseURL: process.env.PDF_MICROSERIVCE_SD_ENDPOINT });
-
-      const result = await apiClient.post('/email', req.body);
-
-      res.send(result);
     } catch (error) {
       console.log(error.message);
       logger().info(error.message);
