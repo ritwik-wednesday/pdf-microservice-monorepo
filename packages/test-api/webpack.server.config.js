@@ -4,6 +4,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const nodeExternals = require('webpack-node-externals');
 
 const dotEnvFile =
   process.env.ENVIRONMENT_NAME === 'production' ? `.env` : `.env.${process.env.ENVIRONMENT_NAME || 'local'}`;
@@ -28,9 +29,7 @@ module.exports = (options = {}) => ({
   entry: options.entry,
   optimization: options.optimization,
   devtool: 'source-map',
-  externals: {
-    bull: 'commonjs2 bull'
-  },
+  externals: ['commonjs2 bull', nodeExternals()],
   module: {
     rules: [
       {
